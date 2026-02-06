@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Aula de revisão</title>
+</head>
+<body>
+    <div class="container">
+        <div class="column card-form">
+            <div class="header">
+                <h1>Criar Crachá</h1>
+                <p>Preencha os dados para gerar seu card.</p>
+            </div>
+            
+            <div class="input-group"> 
+                <label for="nome">Nome Completo</label>
+                <input type="text" id="nome" placeholder="Ex: João Silva" oninput="preenchendo(this, 'nomeResultado')">
+                
+                <label for="cargo">Cargo / Função</label>
+                <input type="text" id="cargo" placeholder="Ex: Desenvolvedor Front-end" oninput="preenchendo(this, 'cargoResultado')">
+                
+                <label for="cor">Cor do Card</label>
+                <div class="color-picker-wrapper">
+                    <input type="color" id="cor" value="#4A90E2" oninput="preenchendoCor(this)">
+                    <span>Escolha a cor de fundo</span>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button onclick="alert('Card Salvo!')">Salvar Card</button>
+            </div>
+        </div>
+
+        <div class="column display-area">
+            <h2>Pré-visualização</h2>
+            <div id="card" class="card-preview">
+                <div class="card-content">
+                    <h2 id="nomeResultado">Seu Nome</h2>
+                    <p id="cargoResultado">Seu Cargo</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

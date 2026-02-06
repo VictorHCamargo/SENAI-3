@@ -1,0 +1,46 @@
+html {
+    height: 100vh;
+}
+body {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #aaa;
+    gap: 20px;
+    border-radius: 20px;
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+    color: #fff
+}
+
+.row > h1 {
+    border-bottom: 10px;
+}
+.row > button {
+    width: 200px;
+    align-self: center;
+    padding: 10px;
+    border-radius: 15px;
+    border: none;
+}
+.row > button:hover {
+    background-color: #0f0;
+}
+.cold {
+    background-color: #0ff;
+    color: #000;
+}
+.heat {
+    background-color: #f60;
+}

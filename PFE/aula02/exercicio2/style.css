@@ -1,0 +1,192 @@
+/* Reset básico e Fontes */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html, body {
+    height: 100%;
+    background-color: #f0f2f5; 
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    max-width: 900px;
+    gap: 40px; 
+    justify-content: center;
+    align-items: flex-start; 
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    flex: 1; 
+}
+
+.card-form {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+}
+
+.header h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.header p {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #444;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e1e1e1;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: #4A90E2;
+    outline: none;
+}
+
+.color-picker-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+input[type="color"] {
+    border: none;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    background: none;
+}
+
+/* Botão Salvar */
+.actions {
+    margin-top: 30px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4A90E2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #357ABD;
+}
+
+
+.display-area {
+    align-items: center;
+    justify-content: center;
+}
+
+.display-area h2 {
+    font-size: 18px;
+    color: #888;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+
+.card-preview {
+    width: 320px;
+    height: 450px; 
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease; 
+    position: relative;
+    overflow: hidden;
+}
+
+.card-preview::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+.card-content {
+    z-index: 1; 
+}
+
+#nomeResultado {
+    font-size: 32px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    word-wrap: break-word;
+}
+
+#cargoResultado {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    letter-spacing: 1px;
+    border-top: 1px solid rgba(255,255,255,0.4);
+    padding-top: 10px;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .column {
+        width: 100%;
+    }
+}
