@@ -20,5 +20,5 @@ function conversao() {
         card.classList.remove("heat")
         card.classList.add("cold")
     }
-    pResultado.innerHTML = `O resultado da conversão é ${tempFahrenheit} ºF`
+    pResultado.innerHTML = `O resultado da conversão é ${tempFahrenheit.toFixed(2)} ºF`
 }

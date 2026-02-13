@@ -21,7 +21,7 @@ agendaHorarios.forEach((horario) => {
     var horarioValido = horario >= 0 && horario <= 23
     if(horarioValido) {
         alert(`Compromisso agendado para as ${horario} horas`)
-        contagemValidos += 1
+        contagemValidos++;
     } else {
         alert(`Atenção: O horário ${horario} é inválido!`)
     }
