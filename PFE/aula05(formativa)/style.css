@@ -1,0 +1,471 @@
+:root {
+    --bg-color: #fafafa;
+    --card-bg: #ffffff;
+    --text-color: #262626;
+    --text-muted: #8e8e8e;
+    --border-color: #dbdbdb;
+    --link-color: #00376b;
+    --mention-color: #0095f6;
+    
+    --story-gradient: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    --story-close-friends: #45bd62;
+    --sidebar-width: 244px;
+    --recommendation-width: 320px;
+}
+
+body.dark-mode {
+    --bg-color: #000000;
+    --card-bg: #0f0f0f;
+    --text-color: #f5f5f5;
+    --text-muted: #a8a8a8;
+    --border-color: #363636;
+    --link-color: #e0f1ff;
+    --mention-color: #e0f1ff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: var(--sidebar-width) 1fr; 
+}
+
+.text-gradient {
+   
+    background-image: var(--story-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent; 
+} 
+#content {
+    display: grid;
+    grid-template-columns: minmax(auto, 630px) var(--recommendation-width);
+    justify-content: center;
+    gap: 20px;
+}
+
+#sidebar {
+    width: 100%; 
+    height: 100vh;
+    box-shadow: var(--border-color) 1.95px 1.95px 2.6px;
+    position: sticky; 
+    top: 0;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--card-bg);
+}
+
+.navbar {
+    display: flex; 
+    flex-direction: column; 
+    gap: 5px; 
+    margin-top: 30px; 
+    font-weight: 600;
+}
+
+.navbar a {
+    display: flex;
+    align-items: center;
+    gap: 15px; 
+    padding: 12px 15px; 
+    border-radius: 8px; 
+    cursor: pointer;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: background-color 0.2s ease; 
+}
+
+.navbar a:hover {
+    background-color: var(--border-color); 
+}
+
+
+#main {
+    width: 100%;
+    max-width: 630px;
+    padding-top: 30px;
+}
+
+#recommendation {
+    width: 100%; 
+    margin-top: 50px;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+@media (max-width: 1000px) {
+    .content {
+        grid-template-columns: minmax(auto, 630px);
+    }
+    .recommendation {
+        display: none;
+    }
+}
+
+.sidebar-content h1 {
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+    font-family: 'Brush Script MT', cursive; 
+}
+
+.theme-toggle-btn {
+    background-color: transparent;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    transition: background 0.6s;
+}
+
+.theme-toggle-btn:hover {
+    background-color: var(--border-color);
+}
+
+.stories {
+    display: flex;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--border-color) 0px 10px 20px, var(--border-color) 0px 6px 6px;
+    overflow-x: auto;
+    padding: 20px 0;
+    margin-bottom: 30px;
+    scrollbar-width: none; 
+}
+.stories::-webkit-scrollbar {
+    display: none; 
+}
+
+.story-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px; 
+    margin-left: 15px; 
+    flex-shrink: 0; 
+    cursor: pointer;
+}
+
+.story-ring {
+    width: 66px;
+    height: 66px;
+    border-radius: 50%;
+    background: var(--story-gradient);
+    padding: 2px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.story-ring.close-friends {
+    background: var(--story-close-friends);
+}
+.story-ring.no-stories {
+    background: none;
+}
+.story-ring img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid var(--card-bg); 
+    object-fit: cover;
+}
+
+.story-user {
+    font-size: 0.75rem; 
+    color: var(--text-color);
+    max-width: 74px; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    text-align: center;
+}
+
+.post {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: var(--border-color) 0px 3px 6px, var(--border-color) 0px 3px 6px;
+    padding: 5px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.post-header .story-ring {
+    width: 42px;
+    height: 42px;
+    margin-right: 10px;
+}
+
+.post-user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.post-user-info .username {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.post-user-info .time {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
+.post-image, 
+.post-video {
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 10px;
+}
+
+.post-video {
+   object-fit: cover;
+   background-color: var(--bg-color);
+}
+
+.post-description {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-top: 5px;
+}
+
+.post-description strong {
+    font-weight: 600;
+    margin-right: 5px;
+}
+
+.post-description .mention {
+    color: var(--mention-color);
+    text-decoration: none;
+}
+
+.post-description .mention:hover {
+    text-decoration: underline;
+}
+
+.recommendation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.recommendation-title {
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.my-profile {
+    margin-bottom: 10px;
+}
+.my-profile img {
+    width: 56px; 
+    height: 56px;
+}
+
+
+.switch-btn {
+    color: var(--mention-color);
+    background: none;
+    border: none;
+    font-weight: 600;
+    font-size: 0.75rem;
+    cursor: pointer;
+}
+
+
+.recommendation-header .recommendation-title {
+    margin-bottom: 0;
+}
+.see-all-btn {
+    background: none;
+    border: none;
+    font-weight: 600;
+    font-size: 0.75rem;
+    color: var(--text-color);
+    cursor: pointer;
+}
+.see-all-btn:hover {
+    color: var(--text-muted);
+}
+
+
+.recommendation-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.recommendation-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.recommendation-user img {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.recommendation-user .username {
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.recommendation-user .subtitle {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
+.follow-btn {
+    color: var(--mention-color);
+    background: none;
+    border: none;
+    font-weight: 600;
+    font-size: 0.75rem;
+    cursor: pointer;
+}
+
+.recommendation-footer {
+    margin-top: 30px;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
+.recommendation-footer nav {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 3px;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.recommendation-footer nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+}
+
+.recommendation-footer nav a:hover {
+    text-decoration: underline;
+}
+
+.recommendation-footer p {
+    text-transform: uppercase;
+}
+
+.post-footer {
+    padding: 5px 0 10px 0;
+}
+
+.post-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.actions-left {
+    display: flex;
+    gap: 16px; 
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color); 
+    transition: opacity 0.2s;
+}
+
+.action-btn:hover {
+    opacity: 0.6;
+}
+
+.action-btn svg {
+    fill: var(--text-color); 
+}
+
+.post-likes {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.post-likes strong {
+    font-weight: 600;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    body {
+        display: block; 
+        padding-bottom: 60px;
+    }
+    .sidebar {
+        position: fixed;
+        bottom: 0;
+        top: auto; 
+        height: 60px;
+        width: 100%;
+        padding: 0;
+        flex-direction: row;
+        border-top: 1px solid var(--border-color);
+        box-shadow: none;
+        z-index: 1000;
+    }
+
+    .sidebar-content h1,
+    .sidebar-info,
+    .nav-text {
+        display: none;
+    }
+
+    .sidebar-content {
+        width: 100%;
+        margin: 0;
+    }
+
+    .navbar {
+        flex-direction: row;
+        margin-top: 0;
+        height: 100%;
+        justify-content: space-around; 
+        align-items: center;
+        gap: 0;
+    }
+    .navbar a {
+        padding: 10px;
+        border-radius: 0;
+    }
+    .navbar a:hover {
+        background-color: transparent; 
+    }
+}
