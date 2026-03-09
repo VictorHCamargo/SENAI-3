@@ -80,9 +80,9 @@ class _TodoPageState extends State<TodoPage> {
             },
             textInputAction: TextInputAction.done,
           ),
-          ElevatedButton(
+          IconButton(
             onPressed: adicionarTarefa,
-            child: const Text("Adicionar")
+            icon : const Icon(Icons.add, color: Colors.green,)
           ),
           Expanded(
             child: tarefas.isEmpty 
