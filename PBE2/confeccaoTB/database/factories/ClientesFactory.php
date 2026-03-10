@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Faker\Factory as Faker;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Clientes>
@@ -16,12 +17,13 @@ class ClientesFactory extends Factory
      */
     public function definition(): array
     {
+        $fakerBr = Faker::create('pt_BR');
         return [
-            'nome'=> fake()->text,
-            'cpf'=> fake()->text(),
-            'email' => fake()->text(),
-            'telefone' => fake()->text(),
-            'endereco' => fake()->text
+            'nome'     => $fakerBr->name(),
+            'cpf'      => $fakerBr->numerify('###.###.###-##'), 
+            'email'    => $fakerBr->unique()->safeEmail(),
+            'telefone' => $fakerBr->cellphone(), 
+            'endereco' => $fakerBr->address(),
         ];
     }
 }
