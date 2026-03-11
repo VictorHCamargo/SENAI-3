@@ -32,5 +32,60 @@
                 {{ $slot }}
             </main>
         </div>
+        <x-modal-delete/>
+        <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Função para aplicar máscara de CPF (000.000.000-00)
+            const mascaraCPF = (valor) => {
+                return valor.replace(/\D/g, '')
+                            .replace(/(\d{3})(\d)/, '$1.$2')
+                            .replace(/(\d{3})(\d)/, '$1.$2')
+                            .replace(/(\d{3})(\d{1,2})/, '$1-$2')
+                            .replace(/(-\d{2})\d+?$/, '$1');
+            };
+
+            // Função para aplicar máscara de CNPJ (00.000.000/0000-00)
+            const mascaraCNPJ = (valor) => {
+                return valor.replace(/\D/g, '')
+                            .replace(/(\d{2})(\d)/, '$1.$2')
+                            .replace(/(\d{3})(\d)/, '$1.$2')
+                            .replace(/(\d{3})(\d)/, '$1/$2')
+                            .replace(/(\d{4})(\d{1,2})/, '$1-$2')
+                            .replace(/(-\d{2})\d+?$/, '$1');
+            };
+
+            // Função para aplicar máscara de Telefone ( (00) 00000-0000 )
+            const mascaraTelefone = (valor) => {
+                let v = valor.replace(/\D/g, '');
+                if (v.length <= 10) {
+                    return v.replace(/(\d{2})(\d)/, '($1) $2')
+                            .replace(/(\d{4})(\d)/, '$1-$2')
+                            .replace(/(-\d{4})\d+?$/, '$1');
+                } else {
+                    return v.replace(/(\d{2})(\d)/, '($1) $2')
+                            .replace(/(\d{5})(\d)/, '$1-$2')
+                            .replace(/(-\d{4})\d+?$/, '$1');
+                }
+            };
+
+            // Aplica os eventos nos inputs baseados no atributo 'name' ou 'id'
+            document.querySelectorAll('input[name="cpf"], input#cpf').forEach(el => {
+                // Aplica a máscara logo ao carregar a página (útil para o edit)
+                el.value = mascaraCPF(el.value);
+                el.addEventListener('input', (e) => e.target.value = mascaraCPF(e.target.value));
+            });
+
+            document.querySelectorAll('input[name="cnpj"], input#cnpj').forEach(el => {
+                el.value = mascaraCNPJ(el.value);
+                el.addEventListener('input', (e) => e.target.value = mascaraCNPJ(e.target.value));
+            });
+
+            document.querySelectorAll('input[name="telefone"], input#telefone').forEach(el => {
+                el.value = mascaraTelefone(el.value);
+                el.addEventListener('input', (e) => e.target.value = mascaraTelefone(e.target.value));
+            });
+        });
+    </script>   
     </body>
 </html>

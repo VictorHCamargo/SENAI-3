@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
         User::firstOrCreate(
             ['email' => 'test@example.com'], 
             [
-                'name' => 'Test User',
+                'name' => 'Usuário Teste',
                 'password' => 'test1234', 
             ]
         );

@@ -40,4 +40,30 @@ class EstoqueController extends Controller
         return redirect()->route('estoque')
             ->with('success', 'Insumo registrado no estoque com sucesso!');
     }
+    public function edit(Estoque $estoque) {
+        $produtos = Produtos::all();
+        $fornecedores = Fornecedores::all();
+        return view('estoque.edit', compact('estoque', 'produtos', 'fornecedores'));
+    }
+
+    public function update(Request $request, Estoque $estoque) {
+        $validated = $request->validate([
+            'item' => 'required|string|max:255',
+            'produto_id' => 'nullable|exists:produtos,id',
+            'fornecedor_id' => 'nullable|exists:fornecedores,id',
+            'quantidade_atual' => 'required|numeric',
+            'quantidade_minima' => 'required|numeric',
+            'unidade_medida' => 'required|string|max:50',
+            'valor_unitario' => 'required|numeric',
+            'localizacao' => 'nullable|string|max:255',
+        ]);
+
+        $estoque->update($validated);
+        return redirect()->route('estoque')->with('success','Insumo atualizado no estoque!!');
+    }
+
+    public function destroy(Estoque $estoque) {
+        $estoque->delete();
+        return redirect()->route('estoque')->with('success','Insumo removido!!');
+    }
 }

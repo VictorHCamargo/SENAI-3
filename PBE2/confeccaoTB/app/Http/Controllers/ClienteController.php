@@ -27,4 +27,25 @@ class ClienteController extends Controller
 
         return redirect()->route('clientes')->with('success','Cliente cadastrado com sucesso');
     }
+    public function edit($id) {
+        $cliente = Clientes::findOrFail($id);
+        return view('clientes.edit', compact('cliente'));
+    }
+    public function update(Request $request,Clientes $cliente) {
+        $request->validate([
+            'nome' => 'required|string|max:255',
+            'email' => 'required|email|unique:clientes,email,'.  $cliente->id,
+            'telefone' => 'required|string',
+            'endereco' => 'nullable|string'
+        ]);
+        $cliente->update($request->all());
+
+        return redirect()->route('clientes')->with('success','Cliente atualizado!!');
+    }
+
+    public function destroy($id) {
+        $cliente = Clientes::findOrFail($id);
+        $cliente->delete();
+        return redirect()->route('clientes')->with('success','Cliente removido!!');
+    }
 }

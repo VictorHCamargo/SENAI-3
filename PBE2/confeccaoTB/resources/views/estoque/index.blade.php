@@ -34,6 +34,7 @@
                                 <th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-gray-500 text-center">Unidade</th>
                                 <th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-gray-500 text-right">Valor Unit.</th>
                                 <th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-gray-500 text-right">Subtotal</th>
+                                <th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-gray-500 text-center">Ações</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-100">
@@ -59,6 +60,22 @@
                                     </td>
                                     <td class="px-6 py-4 text-sm text-gray-800 text-right font-bold">
                                         R$ {{ number_format($itens->quantidade_atual * $itens->valor_unitario, 2, ',', '.') }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center justify-center space-x-2">
+                                            <a href="{{ route('estoque.edit', $itens->id) }}" 
+                                            class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 active:bg-blue-900 focus:outline-none focus:border-blue-900 focus:ring ring-blue-300 transition ease-in-out duration-150">
+                                                Editar
+                                            </a>
+
+                                            <button type="button" 
+                                                    data-url="{{ route('clientes.destroy', $itens->id) }}"
+                                                    data-nome="{{ $itens->item }}"
+                                                    onclick="openDeleteModal(this.dataset.url, this.dataset.nome)" 
+                                                    class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:ring ring-red-300 transition ease-in-out duration-150">
+                                                Excluir
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             @empty
