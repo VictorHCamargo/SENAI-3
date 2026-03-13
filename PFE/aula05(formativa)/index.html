@@ -46,7 +46,7 @@
         <div id="main">
             <div class="stories">
                 <div class="story-item">
-                    <div class="story-ring">
+                    <div class="story-ring viewed">
                         <img src="./assets/image/defaultProfile.jpg" alt="Foto do usuário">
                     </div>
                     <span class="story-user">_V1cTorCamargo111</span>
@@ -71,6 +71,22 @@
                 </div>
             </div>
 
+            <div id="storyModal" class="story-modal">
+                <div class="story-progress-container" id="storyProgressContainer"></div>
+                <div class="story-header">
+                    <div class="story-user-info">
+                        <img id="storyProfileImg" src="" alt="Profile">
+                        <span id="storyUsername"></span>
+                    </div>
+                    <button class="close-story" onclick="closeStoryModal()">×</button>
+                </div>
+                <div class="story-content">
+                    <img id="storyMainImage" src="assets/image/senai.png" alt="Story Content">
+                </div>
+                <div class="story-nav left" onclick="prevStory()"></div>
+                <div class="story-nav right" onclick="nextStory()"></div>
+            </div>
+
             <div class="feed">
                 
                 <div class="post">
@@ -83,8 +99,31 @@
                             <span class="time">Há 2 horas</span>
                         </div>
                     </div>
-                    <img class="post-image" src="./assets/image/turma.png" alt="Descrição da imagem - Fonte: UniRV">
-                    <p>Fonte: <a href="https://www.unirv.edu.br/ver_noticias.php?codabr=18794">UniRV</a></p>
+                    <div class="post-carousel">
+                        <div class="carousel-track-container">
+                            <ul class="carousel-track">
+                                <li class="carousel-slide">
+                                    <img class="post-image" src="./assets/image/turma.png" alt="Descrição da imagem - Fonte: UniRV">
+                                    <!-- <p>Fonte: <a href="https://www.unirv.edu.br/ver_noticias.php?codabr=18794">UniRV</a></p> -->
+                                </li>
+                                <li class="carousel-slide">
+                                    <video class="carousel-media" controls>
+                                        <source src="./assets/video/senai_mecanica.mp4" type="video/mp4">
+                                        Seu navegador não suporta a tag de vídeo.
+                                    </video>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <button class="carousel-button carousel-button--left is-hidden">&#10094;</button>
+                        <button class="carousel-button carousel-button--right">&#10095;</button>
+                        
+                        <div class="carousel-nav">
+                            <button class="carousel-indicator current-indicator"></button>
+                            <button class="carousel-indicator"></button>
+                        </div>
+                    </div>
+                    
                     <div class="post-footer">
                         <div class="post-actions">
                             <div class="actions-left">
@@ -158,7 +197,7 @@
                             <img src="./assets/image/senai.png" alt="Foto de perfil">
                         </div>
                         <div class="post-user-info">
-                            <span class="username">senai_oficial</span>
+                            <span class="username">senai_oficial e prof_carlos.ti</span>
                             <span class="time">Há 8 horas</span>
                         </div>
                     </div>
@@ -182,7 +221,7 @@
                         </div>
                     </div>
                     <p class="post-description">
-                        <strong>senai_oficial</strong> Resumo do que rolou na nossa Feira de Inovação Tecnológica 2026! 🚀🤖
+                        <strong>senai_oficial</strong> Resumo do que rolou na nossa Aula de Mecânica 🚀🤖
                     </p>
                 </div>
 
@@ -278,6 +317,19 @@
                 <p>© 2026 INSTAGRAM-SENAI</p>
             </div>
         </div>
-    </div> 
+    </div>
+    <div class="modal-overlay" id="commentModal">
+        <div class="modal-content">
+            <h3 style="font-size: 1rem;">Adicionar comentário</h3>
+            <textarea id="commentInput" rows="3" placeholder="Escreva algo para o post..."></textarea>
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
+                <button class="btn-send" onclick="sendComment()">Publicar</button>
+            </div>
+        </div>
+    </div>
+    <script src="./js/modal.js"></script>
+    <script src="./js/script.js"></script>
+    <script src="./js/stories.js"></script>
 </body>
 </html>
