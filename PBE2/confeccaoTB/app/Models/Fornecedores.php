@@ -22,6 +22,6 @@ class Fornecedores extends Model
 
     public function estoque()
     {
-        return $this->hasMany(Estoque::class, 'cliente_id');
+        return $this->hasMany(Estoque::class, 'fornecedor_id');
     }
 }
