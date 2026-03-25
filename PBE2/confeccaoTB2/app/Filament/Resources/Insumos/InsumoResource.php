@@ -18,6 +18,8 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 
 class InsumoResource extends Resource
 {
@@ -83,7 +85,10 @@ class InsumoResource extends Resource
             TextColumn::make("estoque")
                 ->numeric(decimalPlaces: 2)
                 ->label("Estoque"),
-        ]);
+        ])->recordActions([
+                ViewAction::make(),
+                EditAction::make(),
+            ]);
     }
 
     public static function getRelations(): array

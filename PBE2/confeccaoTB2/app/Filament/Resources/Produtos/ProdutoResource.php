@@ -17,6 +17,8 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 
 class ProdutoResource extends Resource
 {
@@ -65,6 +67,9 @@ class ProdutoResource extends Resource
                     ->badge() 
                     ->color(fn (int $state): string => $state <= 5 ? 'danger' : 'success')
                     ->label("Estoque"),
+            ])->recordActions([
+                ViewAction::make(),
+                EditAction::make(),
             ]);
         }
 

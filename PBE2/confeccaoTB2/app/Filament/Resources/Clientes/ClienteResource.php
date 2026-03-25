@@ -18,6 +18,8 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Support\RawJs;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 
 class ClienteResource extends Resource
 {
@@ -53,7 +55,10 @@ class ClienteResource extends Resource
             TextColumn::make("email")->searchable(),
             TextColumn::make("telefone"),
             TextColumn::make("documento")
-        ]);
+        ])->recordActions([
+                ViewAction::make(),
+                EditAction::make(),
+            ]);
     }
 
     public static function getRelations(): array
