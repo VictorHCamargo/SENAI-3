@@ -11,6 +11,7 @@ use App\Filament\Resources\Fornecedors\Schemas\FornecedorInfolist;
 use App\Filament\Resources\Fornecedors\Tables\FornecedorsTable;
 use App\Models\Fornecedor;
 use BackedEnum;
+use UnitEnum;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -19,12 +20,25 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Support\RawJs;
 use Filament\Tables\Table;
-
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\TernaryFilter;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 class FornecedorResource extends Resource
 {
     protected static ?string $model = Fornecedor::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
+    public static ?string $modelLabel = 'Fornecedor';
+
+    public static ?string $navigationLabel = 'Fornecedor';
+
+    public static ?string $pluralModelLabel = 'Fornecedores';
+
+    public static string|UnitEnum|null $navigationGroup = 'Administração';
 
     protected static ?string $recordTitleAttribute = 'Fornecedores';
 
@@ -97,7 +111,67 @@ class FornecedorResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return FornecedorsTable::configure($table);
+        return $table
+            ->columns([
+               TextColumn::make('razao_social')
+                    ->label('Razão Social')
+                    ->searchable()
+                    ->sortable(),
+
+                TextColumn::make('nome_fantasia')
+                    ->label('Nome Fantasia')
+                    ->searchable()
+                    ->toggleable(),
+
+                TextColumn::make('documento')
+                    ->label('CPF/CNPJ')
+                    ->searchable(),
+
+                TextColumn::make('tipo_material')
+                    ->label('Tipo de Material')
+                    ->badge() // Transforma em um "crachá" visual
+                    ->color('info')
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'tecidos' => 'Tecidos',
+                        'aviamentos' => 'Aviamentos',
+                        'servicos' => 'Serviços (Facção)',
+                        'maquinario' => 'Maquinário',
+                        'outros' => 'Outros',
+                        default => $state,
+                    }),
+
+                TextColumn::make('telefone(WhatsApp)')
+                    ->label('WhatsApp')
+                    ->toggleable(isToggledHiddenByDefault: true),
+
+                IconColumn::make('ativo')
+                    ->label('Ativo')
+                    ->boolean()
+                    ->sortable(),
+
+                TextColumn::make('created_at')
+                    ->label('Criado em')
+                    ->dateTime('d/m/Y H:i')
+                    ->toggleable(isToggledHiddenByDefault: true),
+            ])
+            ->filters([
+                TernaryFilter::make('ativo')
+                    ->label('Apenas Ativos'),
+                
+                SelectFilter::make('tipo_material')
+                    ->label('Tipo de Material')
+                    ->options([
+                        'tecidos' => 'Tecidos',
+                        'aviamentos' => 'Aviamentos',
+                        'servicos' => 'Serviços (Facção)',
+                        'maquinario' => 'Maquinário',
+                        'outros' => 'Outros',
+                    ]),
+            ])
+            ->recordActions([
+                ViewAction::make()->label("Ver"),
+                EditAction::make()->label("Editar")
+            ]);
     }
 
     public static function getRelations(): array

@@ -86,8 +86,8 @@ class InsumoResource extends Resource
                 ->numeric(decimalPlaces: 2)
                 ->label("Estoque"),
         ])->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
+                ViewAction::make()->label("Ver"),
+                EditAction::make()->label("Editar")
             ]);
     }
 

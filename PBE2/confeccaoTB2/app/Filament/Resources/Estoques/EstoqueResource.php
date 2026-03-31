@@ -18,6 +18,8 @@ use Filament\Tables\Table;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 
 class EstoqueResource extends Resource
 {
@@ -95,7 +97,10 @@ class EstoqueResource extends Resource
                 ->label('Última Atualização')
                 ->dateTime('d/m/Y H:i')
                 ->sortable(),
-        ]);
+        ])->recordActions([
+                ViewAction::make()->label("Ver"),
+                EditAction::make()->label("Editar")
+            ]);
     }
 
     public static function getRelations(): array

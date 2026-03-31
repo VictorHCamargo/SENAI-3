@@ -71,8 +71,8 @@ class PedidoResource extends Resource
             TextColumn::make("valor_total")->label("Valor Total")->money("BRL")->sortable(),
             TextColumn::make("created_at")->label("Data do Pedido")->dateTime("d/m/Y H:i")->sortable()
         ])->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
+                ViewAction::make()->label("Ver"),
+                EditAction::make()->label("Editar")
             ]);
     }
 

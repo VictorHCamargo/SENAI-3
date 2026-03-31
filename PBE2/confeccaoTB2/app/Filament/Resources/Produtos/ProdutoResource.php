@@ -43,11 +43,15 @@ class ProdutoResource extends Resource
                 ->label("Preço de Venda")
                 ->prefix('R$'),
                 
-            TextInput::make("estoque")
-                ->integer()
-                ->label("Estoque Atual")
-                ->default(0),
-        ]);
+            TextInput::make('estoque.quantidade')
+            ->label('Quantidade em Estoque')
+            ->numeric()
+            ->default(0)
+            ->required(),
+
+            TextInput::make('estoque.localizacao')
+                ->label('Localização no Depósito'),
+            ]);
     }
 
     public static function infolist(Schema $schema): Schema
@@ -68,8 +72,8 @@ class ProdutoResource extends Resource
                     ->color(fn (int $state): string => $state <= 5 ? 'danger' : 'success')
                     ->label("Estoque"),
             ])->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
+                ViewAction::make()->label("Ver"),
+                EditAction::make()->label("Editar")
             ]);
         }
 

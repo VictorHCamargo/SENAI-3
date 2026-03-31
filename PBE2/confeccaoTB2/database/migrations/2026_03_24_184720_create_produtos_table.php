@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string("nome");
             $table->string("referencia")->nullable();
             $table->decimal("preco_venda",10,2)->nullable();
-            $table->integer('estoque')->default(0);
             $table->timestamps();
         });
     }
