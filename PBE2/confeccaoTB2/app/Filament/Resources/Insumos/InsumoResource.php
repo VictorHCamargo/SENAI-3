@@ -11,6 +11,7 @@ use App\Filament\Resources\Insumos\Schemas\InsumoInfolist;
 use App\Filament\Resources\Insumos\Tables\InsumosTable;
 use App\Models\Insumo;
 use BackedEnum;
+use UnitEnum;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
@@ -24,6 +25,8 @@ use Filament\Actions\ViewAction;
 class InsumoResource extends Resource
 {
     protected static ?string $model = Insumo::class;
+
+    public static string|UnitEnum|null $navigationGroup = 'Estoque';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 

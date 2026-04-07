@@ -11,6 +11,7 @@ use App\Filament\Resources\Produtos\Schemas\ProdutoInfolist;
 use App\Filament\Resources\Produtos\Tables\ProdutosTable;
 use App\Models\Produto;
 use BackedEnum;
+use UnitEnum;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -24,6 +25,7 @@ class ProdutoResource extends Resource
 {
     protected static ?string $model = Produto::class;
 
+    public static string|UnitEnum|null $navigationGroup = 'Estoque';
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'Produtos';

@@ -10,6 +10,7 @@ use App\Filament\Resources\Estoques\Schemas\EstoqueForm;
 use App\Filament\Resources\Estoques\Schemas\EstoqueInfolist;
 use App\Filament\Resources\Estoques\Tables\EstoquesTable;
 use App\Models\Estoque;
+use UnitEnum;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -24,6 +25,8 @@ use Filament\Actions\ViewAction;
 class EstoqueResource extends Resource
 {
     protected static ?string $model = Estoque::class;
+
+    public static string|UnitEnum|null $navigationGroup = 'Estoque';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
