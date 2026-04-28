@@ -1,9 +1,15 @@
 <?php
 
+use App\Http\Controllers\PokemonController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use App\Models\Usuario;
+
+Route::get('pokedex',[PokemonController::class, 'index']);
+Route::get('usuarios', [UserController::class, 'index'])->name("usuarios");
+Route::get('usuarios/{id}', [UserController::class, 'show'])->name('users.show');
 
 Route::get('pokemon/{nome}',function ($nome) {
     $response = Http::withoutVerifying()->get("https://pokeapi.co/api/v2/pokemon/{$nome}");
@@ -15,6 +21,24 @@ Route::get('pokemon/{nome}',function ($nome) {
                 'identificador' => $dados['id'],
                 'nomePokemon' => ucfirst($dados['name']),
                 'foto' => $dados['sprites']['front_default']
+            ]
+        ],200);
+    }
+    return response()->json(['erro' => 'Pokemon não encontrado!'],404);
+});
+
+Route::get('pokemon/id/{id}',function ($id) {
+    $response = Http::withoutVerifying()->get("https://pokeapi.co/api/v2/pokemon/{$id}");
+    if($response->successful()) {
+        $dados = $response->json();
+        return response()->json([
+            'status' => 'Conectado com sucesso!',
+            'resultado' => [
+                'nomePokemon' => ucfirst($dados['name']),
+                'foto' => $dados['sprites']['front_default'],
+                'peso' => $dados['weight'],
+                'altura' => $dados['height'],
+                'tipos' => $dados['types']
             ]
         ],200);
     }
@@ -99,46 +123,46 @@ Route::post('user', function (Request $request) {
 });
 
 
-Route::get('usuarios', function () {
-    $usuarios = Usuario::all();
+// Route::get('usuarios', function () {
+//     $usuarios = Usuario::all();
 
-    return response()->json([
-        'status'    => 'Usuários buscados!',
-        'resultado' => $usuarios
-    ]);
-});
+//     return response()->json([
+//         'status'    => 'Usuários buscados!',
+//         'resultado' => $usuarios
+//     ]);
+// });
 
-Route::get('usuario/{id}' , function ($id) {
-    $usuario = Usuario::find($id);
+// Route::get('usuario/{id}' , function ($id) {
+//     $usuario = Usuario::find($id);
 
-    return response()->json([
-        'status'    => 'Usuários buscados!',
-        'resultado' => $usuario
-    ]);
-});
+//     return response()->json([
+//         'status'    => 'Usuários buscados!',
+//         'resultado' => $usuario
+//     ]);
+// });
 
-Route::post('usuarios', function (Request $request) {
-    $dados = $request->validate([
-        'nome'      => 'required|string|min:3',
-        'sobrenome' => 'required|string|min:3',
-        'cargo'     => 'required|string',
-        'email'     => 'required|email|unique:usuarios,email',
-        'telefone'  => 'required|string|min:8',
-    ]);
+// Route::post('usuarios', function (Request $request) {
+//     $dados = $request->validate([
+//         'nome'      => 'required|string|min:3',
+//         'sobrenome' => 'required|string|min:3',
+//         'cargo'     => 'required|string',
+//         'email'     => 'required|email|unique:usuarios,email',
+//         'telefone'  => 'required|string|min:8',
+//     ]);
 
-    $usuario = Usuario::create([
-        'nome'      => $dados['nome'],
-        'sobrenome' => $dados['sobrenome'],
-        'cargo'     => $dados['cargo'],
-        'email'     => $dados['email'],
-        'telefone'  => $dados['telefone'],
-    ]);
+//     $usuario = Usuario::create([
+//         'nome'      => $dados['nome'],
+//         'sobrenome' => $dados['sobrenome'],
+//         'cargo'     => $dados['cargo'],
+//         'email'     => $dados['email'],
+//         'telefone'  => $dados['telefone'],
+//     ]);
 
-    return response()->json([
-        'mensagem' => 'Usuário cadastrado com sucesso!',
-        'usuario'  => $usuario
-    ], 201);
-});
+//     return response()->json([
+//         'mensagem' => 'Usuário cadastrado com sucesso!',
+//         'usuario'  => $usuario
+//     ], 201);
+// });
 
 Route::get('/', function () {
     return view('welcome');
