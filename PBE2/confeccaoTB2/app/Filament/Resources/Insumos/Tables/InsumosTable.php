@@ -16,20 +16,26 @@ class InsumosTable
         return $table
             ->columns([
                 TextColumn::make('nome')
+                    ->label('Nome')
                     ->searchable(),
                 TextColumn::make('unidade_medida')
+                    ->label('Unidade de Medida')
                     ->searchable(),
                 TextColumn::make('preco_custo')
+                    ->label('Preço de Custo')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('estoque')
+                    ->label('Quantidade em Estoque')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('created_at')
+                    ->label('Criado em')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label('Atualizado em')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -38,12 +44,12 @@ class InsumosTable
                 //
             ])
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
+                ViewAction::make()->label('Ver'),
+                EditAction::make()->label('Editar'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()->label('Excluir Selecionados'),
                 ]),
             ]);
     }

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Roles\Schemas;
 
+use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
 
 class RoleInfolist
@@ -10,7 +11,11 @@ class RoleInfolist
     {
         return $schema
             ->components([
-                //
+                TextEntry::make('name')
+                    ->label('Cargo'),
+                TextEntry::make('permissions.name')
+                    ->label('Permissões')
+                    ->badge(),
             ]);
     }
 }

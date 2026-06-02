@@ -12,14 +12,16 @@ class ClienteForm
         return $schema
             ->components([
                 TextInput::make('nome')
+                    ->label('Nome')
                     ->required(),
                 TextInput::make('email')
-                    ->label('Email address')
+                    ->label('E-mail')
                     ->email(),
                 TextInput::make('telefone')
+                    ->label('Telefone')
                     ->tel(),
                 TextInput::make('documento')
-                    ->label("CPF"),
+                    ->label('CPF ou CNPJ'),
             ]);
     }
 }

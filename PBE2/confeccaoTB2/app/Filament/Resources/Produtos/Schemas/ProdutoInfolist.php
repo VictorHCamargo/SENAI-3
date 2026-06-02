@@ -11,18 +11,24 @@ class ProdutoInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('nome'),
+                TextEntry::make('nome')
+                    ->label('Nome'),
                 TextEntry::make('referencia')
+                    ->label('Referência/SKU')
                     ->placeholder('-'),
                 TextEntry::make('preco_venda')
-                    ->numeric()
+                    ->label('Preço de Venda')
+                    ->money('BRL')
                     ->placeholder('-'),
-                TextEntry::make('estoque')
+                TextEntry::make('estoque.quantidade')
+                    ->label('Quantidade em Estoque')
                     ->numeric(),
                 TextEntry::make('created_at')
+                    ->label('Criado em')
                     ->dateTime()
                     ->placeholder('-'),
                 TextEntry::make('updated_at')
+                    ->label('Atualizado em')
                     ->dateTime()
                     ->placeholder('-'),
             ]);

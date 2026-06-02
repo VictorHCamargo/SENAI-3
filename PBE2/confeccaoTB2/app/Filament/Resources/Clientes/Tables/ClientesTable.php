@@ -16,19 +16,24 @@ class ClientesTable
         return $table
             ->columns([
                 TextColumn::make('nome')
+                    ->label('Nome')
                     ->searchable(),
                 TextColumn::make('email')
-                    ->label('Email address')
+                    ->label('E-mail')
                     ->searchable(),
                 TextColumn::make('telefone')
+                    ->label('Telefone')
                     ->searchable(),
                 TextColumn::make('documento')
+                    ->label('CPF/CNPJ')
                     ->searchable(),
                 TextColumn::make('created_at')
+                    ->label('Criado em')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label('Atualizado em')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -37,12 +42,12 @@ class ClientesTable
                 //
             ])
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
+                ViewAction::make()->label('Ver'),
+                EditAction::make()->label('Editar'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()->label('Excluir Selecionados'),
                 ]),
             ]);
     }

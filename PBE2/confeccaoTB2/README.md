@@ -1,58 +1,575 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Confecção TB2
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistema de gestão para confecções desenvolvido com Laravel, Filament e Spatie Permission, permitindo o gerenciamento de clientes, fornecedores, produtos, insumos, estoque, pedidos e controle de acesso por perfis de usuário.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# Tecnologias Utilizadas
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Backend
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+* PHP 8.3+
+* Laravel 13
+* Filament 5
+* Eloquent ORM
+* Laravel Migrations
+* Laravel Seeders
 
-## Learning Laravel
+## Painel Administrativo
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+* Filament Admin Panel
+* Filament Resources
+* Filament Forms
+* Filament Tables
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Controle de Permissões
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+* Spatie Laravel Permission
 
-## Agentic Development
+## Banco de Dados
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+* MySQL
 
-```bash
-composer require laravel/boost --dev
+---
 
-php artisan boost:install
+# Objetivo do Projeto
+
+O sistema foi desenvolvido para atender processos administrativos e operacionais de uma confecção, centralizando informações de:
+
+* Clientes
+* Fornecedores
+* Produtos
+* Insumos
+* Estoque
+* Pedidos
+* Usuários
+* Controle de Permissões
+
+O painel administrativo permite que diferentes setores da empresa tenham acesso apenas às funcionalidades necessárias para sua operação.
+
+---
+
+# Arquitetura Geral
+
+O projeto segue o padrão MVC (Model-View-Controller) do Laravel.
+
+## Estrutura Principal
+
+```text
+app/
+├── Filament/
+│   ├── Resources/
+│   └── Pages/
+├── Models/
+├── Providers/
+│
+database/
+├── migrations/
+├── seeders/
+│
+routes/
+└── web.php
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+# Módulos do Sistema
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Clientes
 
-## Code of Conduct
+Responsável pelo cadastro e gerenciamento de clientes.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Informações armazenadas
 
-## Security Vulnerabilities
+* Nome
+* E-mail
+* Telefone
+* Documento
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Tabela
 
-## License
+```sql
+clientes
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+## Fornecedores
+
+Gerencia os fornecedores da empresa.
+
+### Informações armazenadas
+
+* Razão Social
+* Nome Fantasia
+* Documento
+* Inscrição Estadual
+* E-mail
+* Telefone
+* Endereço
+* Tipo de Material
+* Status Ativo/Inativo
+
+### Tabela
+
+```sql
+fornecedors
+```
+
+---
+
+## Insumos
+
+Controle de matéria-prima e materiais utilizados na produção.
+
+### Informações armazenadas
+
+* Nome
+* Unidade de Medida
+* Preço de Custo
+* Estoque
+
+### Tabela
+
+```sql
+insumos
+```
+
+---
+
+## Produtos
+
+Gerenciamento dos produtos comercializados pela confecção.
+
+### Informações armazenadas
+
+* Nome
+* Referência
+* Preço de Venda
+
+### Tabela
+
+```sql
+produtos
+```
+
+---
+
+## Estoque
+
+Controle da quantidade física dos produtos.
+
+### Informações armazenadas
+
+* Produto
+* Quantidade
+* Localização
+
+### Tabela
+
+```sql
+estoques
+```
+
+### Relacionamento
+
+```text
+Produto 1 -> 1 Estoque
+```
+
+---
+
+## Pedidos
+
+Gerenciamento dos pedidos realizados pelos clientes.
+
+### Informações armazenadas
+
+* Cliente
+* Status
+* Valor Total
+
+### Tabela
+
+```sql
+pedidos
+```
+
+### Relacionamento
+
+```text
+Cliente 1 -> N Pedidos
+```
+
+---
+
+## Itens do Pedido
+
+Representa os produtos pertencentes a cada pedido.
+
+### Informações armazenadas
+
+* Pedido
+* Produto
+* Quantidade
+* Preço Unitário
+
+### Tabela
+
+```sql
+item_pedidos
+```
+
+### Relacionamentos
+
+```text
+Pedido 1 -> N Itens
+
+Produto 1 -> N Itens
+```
+
+---
+
+# Modelo de Dados
+
+## Relacionamentos Principais
+
+```text
+Cliente
+   |
+   | 1:N
+   |
+Pedido
+   |
+   | 1:N
+   |
+ItemPedido
+   |
+   | N:1
+   |
+Produto
+   |
+   | 1:1
+   |
+Estoque
+```
+
+---
+
+# Controle de Acesso
+
+O projeto utiliza o pacote Spatie Laravel Permission para gerenciamento de papéis e permissões.
+
+## Guard Utilizado
+
+```php
+protected $guard_name = 'web';
+```
+
+Foi padronizado nos modelos:
+
+* User
+* Role
+* Permission
+
+Essa configuração elimina inconsistências de permissões e erros de:
+
+```text
+Guard Does Not Match
+```
+
+---
+
+# Perfis de Usuário
+
+## Admin
+
+Possui acesso total ao sistema.
+
+Permissões:
+
+* Visualizar
+* Criar
+* Editar
+* Excluir
+
+Em todos os módulos.
+
+---
+
+## Gerente
+
+Acesso administrativo quase total.
+
+Restrições:
+
+* Não pode excluir usuários.
+* Não pode excluir cargos/perfis.
+
+---
+
+## Logística
+
+Focado em operações comerciais.
+
+Acesso aos módulos:
+
+* Clientes
+* Pedidos
+* Fornecedores
+
+---
+
+## Estoque
+
+Focado no controle operacional de materiais.
+
+Acesso aos módulos:
+
+* Produtos
+* Insumos
+* Estoque
+* Visualização de pedidos
+
+---
+
+# Estrutura de Permissões
+
+As permissões são geradas automaticamente através do Seeder.
+
+Padrão:
+
+```text
+ver_clientes
+criar_clientes
+editar_clientes
+deletar_clientes
+```
+
+Aplicado aos módulos:
+
+* clientes
+* pedidos
+* insumos
+* produtos
+* fornecedores
+* usuarios
+* roles
+
+Seguindo o padrão CRUD:
+
+```text
+ver
+criar
+editar
+deletar
+```
+
+---
+
+# Seeders
+
+## RolesAndPermissionsSeeder
+
+Responsável por:
+
+1. Limpar cache do Spatie Permission.
+2. Criar permissões automaticamente.
+3. Criar cargos do sistema.
+4. Associar permissões aos cargos.
+
+---
+
+## DatabaseSeeder
+
+Responsável pela criação segura do usuário administrador principal.
+
+Utiliza:
+
+```php
+updateOrCreate()
+```
+
+Evitando erros de duplicidade:
+
+```text
+UniqueConstraintViolationException
+```
+
+---
+
+# Internacionalização
+
+O sistema está configurado para o padrão brasileiro.
+
+## Locale
+
+```env
+APP_LOCALE=pt_BR
+```
+
+## Timezone
+
+```env
+APP_TIMEZONE=America/Sao_Paulo
+```
+
+Impactos:
+
+* Datas em português.
+* Horários brasileiros.
+* Formatações monetárias compatíveis.
+
+---
+
+# Interface Administrativa
+
+Painel construído utilizando Filament.
+
+## Configurações
+
+### Nome do Sistema
+
+```text
+Confecção TB2
+```
+
+### Cor Principal
+
+```php
+Color::Amber
+```
+
+---
+
+# Navegação
+
+A sidebar foi organizada seguindo boas práticas de UX do Filament.
+
+### Ajustes realizados
+
+* Remoção de ícones duplicados em grupos.
+* Manutenção dos ícones apenas nos Resources.
+* Melhor legibilidade e organização visual.
+
+---
+
+# Rotas
+
+## Rota Principal
+
+```php
+/
+```
+
+Redireciona automaticamente para:
+
+```php
+/admin
+```
+
+## Painel Administrativo
+
+```text
+/admin
+```
+
+Gerenciado pelo Filament.
+
+As rotas internas são registradas automaticamente pelo framework.
+
+---
+
+# Instalação
+
+## Clonar o Projeto
+
+```bash
+git clone <repositorio>
+```
+
+## Instalar Dependências
+
+```bash
+npm install
+composer install
+```
+
+## Configurar Ambiente
+
+```bash
+cp .env.example .env
+```
+
+Configurar:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=confeccao_tb2
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+## Gerar Chave
+
+```bash
+php artisan key:generate
+```
+
+## Executar Migrações
+
+```bash
+php artisan migrate
+```
+
+## Popular Banco
+
+```bash
+php artisan db:seed
+```
+
+Ou
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+## Iniciar Servidor
+
+```bash
+php artisan serve
+npm run dev
+```
+
+---
+
+# Usuário Administrador
+
+Criado automaticamente pelo Seeder.
+
+```text
+Email: admin@confeccao.com
+```
+
+A senha deverá ser definida conforme a implementação do Seeder utilizada no ambiente.
+
+---
+
+# Melhorias Futuras
+
+* Dashboard com indicadores de produção.
+* Controle de movimentação de estoque.
+* Histórico de alterações.
+* Relatórios PDF.
+* Controle financeiro.
+* Integração com emissão de notas fiscais.
+* Controle de produção e ordens de serviço.
+* API REST para integração externa.
+
+---
+
+# Autor
+
+Projeto desenvolvido para gerenciamento operacional da Confecção TB2 utilizando Laravel, Filament e Spatie Permission.

@@ -12,12 +12,15 @@ class PedidoForm
         return $schema
             ->components([
                 TextInput::make('cliente_id')
+                    ->label('Cliente')
                     ->required()
                     ->numeric(),
                 TextInput::make('status')
+                    ->label('Status')
                     ->required()
                     ->default('Pendente'),
                 TextInput::make('valor_total')
+                    ->label('Valor Total')
                     ->numeric(),
             ]);
     }
