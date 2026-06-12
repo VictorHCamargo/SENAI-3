@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">SENAI</a>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                @for(path of paths(); track path.name) {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ path.name }}
+                        </a>
+                        
+                        <ul class="dropdown-menu">
+                            @for(child of path.children; track child.name) {
+                                <li><a class="dropdown-item" [routerLink]="child.way">{{child.name}}</a></li>
+                            }
+                        
+                        </ul>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</nav>

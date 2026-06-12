@@ -1,0 +1,54 @@
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Cadastro de Aluno!</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-start">
+                <div class="row">
+                    <div class="col">
+                        <label for="id">ID</label>
+                        <input class="form-control" type="text" id="id" [formField]="formData.id">
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="name">Nome</label>
+                        <input class="form-control" type="text" id="name" [formField]="formData.name">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="course">Curso:</label>
+                        <select class="form-select" id="course" [formField]="formData.course">
+                            @for(course of studentsService.courses(); track course.title) {
+                            <option [value]="course.title">{{course.title}}</option>
+                            }
+                        </select>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="paid">Pago</label>
+                        <input type="radio" [formField]="formData.status" id="paid">
+                        <label for="peding">Pedente</label>
+                        <input type="radio" [formField]="formData.status" id="peding">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                @if(isDisabled) {
+                <button type="button" class="btn btn-primary" disabled>Salvar</button>
+                } @else {
+                <button type="button" class="btn btn-primary" (click)="onSave()" data-bs-dismiss="modal"
+                    aria-label="Close">Salvar</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>

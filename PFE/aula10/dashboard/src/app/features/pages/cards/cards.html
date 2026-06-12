@@ -1,0 +1,23 @@
+<div class="container-fluid">
+    <div class="row mb-3">
+        <p class="h3">Resumos!</p>
+    </div>
+    <div class="row">
+        @for(card of cards; track card.title) {
+            <div class="col-12 col-md-6 col-lg-3">
+                <div [classList]="`card text-bg-${card.color}`" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{card.title}}</h5>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="row mt-5 ">
+        <div class="col-12">
+            <div class="alert alert-info" role="alert">
+                Manutenção programada hoje às 23h
+            </div>
+        </div>
+    </div>
+</div>
