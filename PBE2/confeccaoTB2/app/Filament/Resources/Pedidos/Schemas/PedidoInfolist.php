@@ -11,16 +11,20 @@ class PedidoInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('cliente_id')
-                    ->numeric(),
-                TextEntry::make('status'),
+                TextEntry::make('cliente.nome')
+                    ->label('Cliente'),
+                TextEntry::make('status')
+                    ->label('Status'),
                 TextEntry::make('valor_total')
-                    ->numeric()
+                    ->label('Valor Total')
+                    ->money('BRL')
                     ->placeholder('-'),
                 TextEntry::make('created_at')
+                    ->label('Criado em')
                     ->dateTime()
                     ->placeholder('-'),
                 TextEntry::make('updated_at')
+                    ->label('Atualizado em')
                     ->dateTime()
                     ->placeholder('-'),
             ]);

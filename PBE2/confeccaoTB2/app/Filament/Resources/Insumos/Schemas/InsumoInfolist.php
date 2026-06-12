@@ -11,17 +11,23 @@ class InsumoInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('nome'),
-                TextEntry::make('unidade_medida'),
+                TextEntry::make('nome')
+                    ->label('Nome'),
+                TextEntry::make('unidade_medida')
+                    ->label('Unidade de Medida'),
                 TextEntry::make('preco_custo')
-                    ->numeric()
+                    ->label('Preço de Custo')
+                    ->money('BRL')
                     ->placeholder('-'),
                 TextEntry::make('estoque')
+                    ->label('Quantidade em Estoque')
                     ->numeric(),
                 TextEntry::make('created_at')
+                    ->label('Criado em')
                     ->dateTime()
                     ->placeholder('-'),
                 TextEntry::make('updated_at')
+                    ->label('Atualizado em')
                     ->dateTime()
                     ->placeholder('-'),
             ]);

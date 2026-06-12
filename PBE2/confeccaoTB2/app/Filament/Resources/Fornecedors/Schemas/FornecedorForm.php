@@ -14,28 +14,36 @@ class FornecedorForm
         return $schema
             ->components([
                 TextInput::make('razao_social')
+                    ->label('Razão Social')
                     ->required(),
-                TextInput::make('nome_fantasia'),
+                TextInput::make('nome_fantasia')
+                    ->label('Nome Fantasia'),
                 TextInput::make('documento')
+                    ->label('CPF ou CNPJ')
                     ->required(),
-                TextInput::make('inscricao_estadual'),
+                TextInput::make('inscricao_estadual')
+                    ->label('Inscrição Estadual'),
                 TextInput::make('email')
-                    ->label('Email address')
+                    ->label('E-mail')
                     ->email(),
                 TextInput::make('telefone(WhatsApp)')
+                    ->label('Telefone (WhatsApp)')
                     ->tel(),
-                TextInput::make('endereco'),
+                TextInput::make('endereco')
+                    ->label('Endereço'),
                 Select::make('tipo_material')
+                    ->label('Tipo de Material')
                     ->options([
             'tecidos' => 'Tecidos',
             'aviamentos' => 'Aviamentos',
-            'servicos' => 'Servicos',
-            'maquinario' => 'Maquinario',
+            'servicos' => 'Serviços',
+            'maquinario' => 'Maquinário',
             'outros' => 'Outros',
         ])
                     ->default('outros')
                     ->required(),
                 Toggle::make('ativo')
+                    ->label('Ativo')
                     ->required(),
             ]);
     }

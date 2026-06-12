@@ -16,18 +16,23 @@ class EstoquesTable
         return $table
             ->columns([
                 TextColumn::make('produto_id')
+                    ->label('Produto')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('quantidade')
+                    ->label('Quantidade')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('localizacao')
+                    ->label('Localização')
                     ->searchable(),
                 TextColumn::make('created_at')
+                    ->label('Criado em')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label('Atualizado em')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -36,12 +41,12 @@ class EstoquesTable
                 //
             ])
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
+                ViewAction::make()->label('Ver'),
+                EditAction::make()->label('Editar'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()->label('Excluir Selecionados'),
                 ]),
             ]);
     }

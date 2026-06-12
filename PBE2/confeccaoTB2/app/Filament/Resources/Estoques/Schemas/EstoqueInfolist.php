@@ -11,16 +11,20 @@ class EstoqueInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('produto_id')
-                    ->numeric(),
+                TextEntry::make('produto.nome')
+                    ->label('Produto'),
                 TextEntry::make('quantidade')
+                    ->label('Quantidade')
                     ->numeric(),
                 TextEntry::make('localizacao')
+                    ->label('Localização')
                     ->placeholder('-'),
                 TextEntry::make('created_at')
+                    ->label('Criado em')
                     ->dateTime()
                     ->placeholder('-'),
                 TextEntry::make('updated_at')
+                    ->label('Atualizado em')
                     ->dateTime()
                     ->placeholder('-'),
             ]);

@@ -11,18 +11,23 @@ class ClienteInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('nome'),
+                TextEntry::make('nome')
+                    ->label('Nome'),
                 TextEntry::make('email')
-                    ->label('Email address')
+                    ->label('E-mail')
                     ->placeholder('-'),
                 TextEntry::make('telefone')
+                    ->label('Telefone')
                     ->placeholder('-'),
                 TextEntry::make('documento')
+                    ->label('CPF/CNPJ')
                     ->placeholder('-'),
                 TextEntry::make('created_at')
+                    ->label('Criado em')
                     ->dateTime()
                     ->placeholder('-'),
                 TextEntry::make('updated_at')
+                    ->label('Atualizado em')
                     ->dateTime()
                     ->placeholder('-'),
             ]);
